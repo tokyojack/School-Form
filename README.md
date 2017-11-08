@@ -12,3 +12,5 @@ INSTRUCTIONS:
 4. Run ```node scripts/createDatabase.js``` in your console.
 5. Launch the node server ```node index.js```
 6. Check out it within your browser.
+
+Now you've just install the program! Raise your dongers ```ヽ༼ຈل͜ຈ༽ﾉ```!
