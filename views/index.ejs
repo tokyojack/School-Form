@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      
+      <meta charset="UTF-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta property="og:github" content="https://github.com/tokyojack">
+      
+      <title>Submit Form</title>
+      <meta name="description" content="Submit different things to be on the TV or announcements!">
+      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/home.css">
+            
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+      
+   </head>
+   <body>
+      <div class="ui middle aligned center aligned grid">
+         <div class="column">
+            
+            <p id="title" class="noselect">Elphi Form</p>
+            <br/>
+                           
+            <form class="ui form" action="/" method="POST">
+               
+               <div class="field margin_bottom">
+                  <input type="text" name="name" placeholder="Name">
+               </div>
+               
+               <div class="field margin_bottom">
+                  <input type="text" name="imageUrl" placeholder="Image Url (Optional)">
+               </div>
+               
+               <div class="field margin_bottom">
+                  <div class="ui selection dropdown">
+                     <input type="hidden" name="location">
+                     <i class="dropdown icon"></i>
+                     <div class="default text">Select Location</div>
+                     <div class="menu">
+                        <div class="item" data-value="tv"><i class="tv icon"></i>TV</div>
+                        <div class="item" data-value="announcement"><i class="unmute icon"></i>Announcements</div>
+                     </div>
+                  </div>
+               </div>
+               
+               <div class="field margin_bottom_large">
+                  <textarea name="content" placeholder="Content"></textarea>
+               </div>
+               
+               <div id="button" class="ui blue labeled submit icon button">
+                  <i class="icon edit"></i>Submit Form
+               </div>
+               
+               <div class="ui error message margin"></div>
+               
+               <% if(error && error.length >= 1){ %>
+                  <div  class="ui negative message margin-top" role="alert">
+                     <%= error %>
+                  </div>
+               <% } %>
+               
+               <% if(success && success.length >= 1){ %>
+                  <div class="ui positive message margin-top" role="alert">
+                     <%= success %>
+                  </div>
+               <% } %>
+               
+            </form>
+         </div>
+      </div>
+      <script type="text/javascript" src="/js/home.js"></script>
+   </body>
+</html>

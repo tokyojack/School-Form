@@ -1,0 +1,70 @@
+#content {
+    padding-top: 5em;
+}
+
+#itemTitle {
+    font-size: 2.1em;
+}
+
+#home {
+    font-size: 2.1em;
+}
+
+#no_margin {
+    margin: 0 !important;
+}
+
+#submit_button {
+    padding-left: 22px;
+    padding-right: 22px;
+    font-size: 1.10em;
+}
+
+.header i.icon {
+    margin-right: 0 !important;
+    font-size: 3em;
+}
+
+.container.main {
+    margin-top: 7.0em;
+}
+
+i.arrow.circle.right.icon {
+    color: gold !important;
+    margin-left: 5px !important;
+}
+
+i.arrow.circle.left.icon {
+    color: gold !important;
+    margin-right: 5px !important;
+}
+
+.item.ui.right.floated {
+    font-size: 1.6em !important;
+}
+
+a.item {
+    margin: 0 !important;
+}
+
+.input {
+    padding-top: 10px;
+}
+
+.padding_left {
+    padding-left: 10px !important;
+}
+
+.margin_left {
+    position: relative;
+    margin-left: 10px !important;
+}
+
+span {
+    font-size: 1.5em !important;
+    font-color: black;
+}
+
+b {
+    font-size: 25px;
+}
