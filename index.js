@@ -27,18 +27,20 @@ app.use(function(req, res, next) {
 
 //============================= Pool =============================
 
-var config = require('./config');
+var config = require('./config/config');
 var mysql = require("mysql");
 var pool = mysql.createPool(config.db);
 
 //============================= Routes =============================
 
-var homeRoutes = require("./routes/indexRoutes")(pool);
-var formsRoutes = require("./routes/formsRoutes")(pool);
-var miscRoutes = require("./routes/miscRoutes")();
 
+var homeRoutes = require("./routes/indexRoutes")(pool);
 app.use("/", homeRoutes);
+
+var formsRoutes = require("./routes/formsRoutes")(pool);
 app.use("/forms", formsRoutes);
+
+var miscRoutes = require("./routes/miscRoutes")();
 app.use("*", miscRoutes);
 
 //============================= Starting Server =============================
