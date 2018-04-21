@@ -35,12 +35,17 @@ require('require-sql');
 
 //============================= Routes =============================
 
+// Index
 
 var homeRoutes = require("./routes/indexRoutes")(pool);
 app.use("/", homeRoutes);
 
+// Forms
+
 var formsRoutes = require("./routes/formsRoutes")(pool);
 app.use("/forms", formsRoutes);
+
+// Misc
 
 var miscRoutes = require("./routes/miscRoutes")();
 app.use("*", miscRoutes);
