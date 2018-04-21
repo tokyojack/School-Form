@@ -23,6 +23,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "mysql": "^2.14.1",
+    "require-sql": "^1.0.0",
     "sightengine": "^1.1.1",
     "swearjar": "^0.2.0"
   }

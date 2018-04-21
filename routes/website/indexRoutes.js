@@ -10,12 +10,13 @@ var utils = require('../utils/utils');
 
 var redirectLocation = "/";
 
+// URL: "/"
 module.exports = function(pool) {
 
-    router.get("/", function(req, res) {
-        res.render("index.ejs");
-    });
+    // "index.ejs" page
+    router.get("/", (req, res) => res.render("index.ejs"));
 
+    // Submitting the form
     router.post("/", function(req, res) {
         if (swearjar.profane(req.body.name) || swearjar.profane(utils.clearNonLetters(req.body.name))) {
             flashUtils.errorMessage(req, res, redirectLocation, 'That can\'t write profanity in the name');
@@ -29,33 +30,29 @@ module.exports = function(pool) {
 
         sightengine.check(['nudity', 'wad']).set_url(req.body.imageUrl).then(function(result) {
             
+            // Removes symbols, spaces, etc.
             if (utils.clearNonLetters(req.body.imageUrl).length >= 1 ) {
                 if (result.status === 'failure') {
                     flashUtils.errorMessage(req, res, redirectLocation, 'An error occurred with that image.');
                     return;
                 }
                 
-                var weaponPercent = result.weapon;
-                var alchoholPercent = result.alcohol;
-                var drugsPercent = result.drugs;
-                var safePercent = result.nudity.safe;
-
-                if (weaponPercent > 0.2) {
+                if (result.weapon > 0.2) {
                     flashUtils.errorMessage(req, res, redirectLocation, 'You\'re not allowed to show weapons');
                     return;
                 }
 
-                if (alchoholPercent > 0.2) {
+                if (result.alcohol > 0.2) {
                     flashUtils.errorMessage(req, res, redirectLocation, 'You\'re not allowed to show alchohol');
                     return;
                 }
 
-                if (drugsPercent > 0.2) {
+                if (result.drugs > 0.2) {
                     flashUtils.errorMessage(req, res, redirectLocation, 'You\'re not allowed to show drugs');
                     return;
                 }
 
-                if (safePercent < 0.2) {
+                if (result.nudity.safe < 0.2) {
                     flashUtils.errorMessage(req, res, redirectLocation, 'You\'re not allowed that amount of nudity');
                     return;
                 }
@@ -68,15 +65,15 @@ module.exports = function(pool) {
                 pictureURL: req.body.imageUrl
             };
 
-            pool.getConnection(function(err, conn) {
+            pool.getConnection(function(err, connection) {
                 if (flashUtils.isDatabaseError(req, res, redirectLocation, err)) {
-                    conn.release();
+                    connection.release();
                     return;
                 }
+                var insertForm = require("./queries/insertForm.sql");
 
-                var insertQuery = "INSERT INTO " + inventoryName + " SET ?";
-                conn.query(insertQuery, item, function(err, results) {
-                    conn.release();
+                connection.query(insertForm, [item], function(err, results) {
+                    connection.release();
                     
                     if (flashUtils.isDatabaseError(req, res, redirectLocation, err))
                         return;

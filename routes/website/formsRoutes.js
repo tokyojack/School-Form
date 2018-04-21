@@ -1,26 +1,29 @@
 var router = require("express").Router();
 
-var inventoryName = require('../config').tableName;
 var flashUtils = require('../utils/flashUtils');
 
 var redirectLocation = "/forms/1";
 
+// URL: "/forms"
 module.exports = function(pool) {
 
-    router.get("/", function(req, res) {
-        res.redirect(redirectLocation);
-    });
+    // "forms.ejs" page
+    router.get("/", (req, res) => res.redirect("/forms/1"));
 
+    // "forms.ejs" page
     router.get("/:pageNumber", function(req, res) {
-        pool.getConnection(function(err, conn) {
+        pool.getConnection(function(err, connection) {
+
             if (flashUtils.isDatabaseError(req, res, redirectLocation, err)) {
-                conn.release();
+                connection.release();
                 return;
             }
+            
+            var selectForms = require("./queries/selectForms.sql");
 
-            var q = "SELECT *  FROM " + inventoryName + " AS froms ORDER BY created_at DESC";
-            conn.query(q, function(err, results) {
-                conn.release();
+            connection.query(selectForms, function(err, results) {
+                connection.release();
+
                 if (flashUtils.isDatabaseError(req, res, redirectLocation, err))
                     return;
 
@@ -38,16 +41,18 @@ module.exports = function(pool) {
         });
     });
 
+    // Delete's the form
     router.get("/:pageNumber/delete/:id", function(req, res) {
-        pool.getConnection(function(err, conn) {
+        pool.getConnection(function(err, connection) {
             if (flashUtils.isDatabaseError(req, res, redirectLocation, err)) {
-                conn.release();
+                connection.release();
                 return;
             }
 
-            var q = "DELETE FROM " + inventoryName + " WHERE id=?";
-            conn.query(q, req.params.id, function(err, results) {
-                conn.release();
+            var deleteForm = require("./queries/deleteForm.sql");
+            
+            connection.query(deleteForm, [req.params.id], function(err, results) {
+                connection.release();
                 if (flashUtils.isDatabaseError(req, res, redirectLocation, err))
                     return;
 
