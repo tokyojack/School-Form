@@ -10,6 +10,5 @@ module.exports = {
     sightEngine: {
         apiUser: '',
         apiSecret: ''
-    },
-    tableName: 'forms'
+    }
 };

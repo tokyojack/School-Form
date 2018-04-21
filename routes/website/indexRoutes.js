@@ -4,7 +4,6 @@ var swearjar = require('swearjar');
 var config = require('../config');
 var sightengine = require('sightengine')(config.sightEngine.apiUser, config.sightEngine.apiSecret);
 
-var inventoryName = config.tableName;
 var flashUtils = require('../utils/flashUtils');
 var utils = require('../utils/utils');
 
