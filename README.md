@@ -1,5 +1,5 @@
 <h2  align="center">School-Form</h2>
-<p  align="center">A form where you're able to add name, image URL, a location, and content. The image is check for crudeness, along with the text check for swearing.</p>
+<p  align="center">A form where you're able to add name, image URL, a location, and content. The image is check for crudeness, along with the text check for swearing</p>
 
 <br/>
 
